@@ -8,6 +8,17 @@ const AddUser = () => {
     e.preventDefault();
     console.log(user);
 
+    fetch('http://localhost:5000/users', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setUser(data);
+      })
+      .catch((error) => console.log(error.message));
+
     e.target.reset();
   };
 
