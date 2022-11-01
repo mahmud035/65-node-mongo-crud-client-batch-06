@@ -15,11 +15,13 @@ const AddUser = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        if (data.acknowledged) {
+          alert('user added successfully');
+          e.target.reset();
+        }
         setUser(data);
       })
       .catch((error) => console.log(error.message));
-
-    e.target.reset();
   };
 
   // When the user leaves an input field, update the user object with the new value.
