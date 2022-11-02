@@ -10,7 +10,25 @@ const Update = () => {
 
   const handleUpdateUser = (e) => {
     e.preventDefault();
-    console.log(user);
+    // console.log(user);
+
+    fetch(`http://localhost:5000/users/${storedUser._id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount) {
+          alert('User updated');
+          console.log(data);
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
   // When the user leaves an input field, update the user object with the new value.
